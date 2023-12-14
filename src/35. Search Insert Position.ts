@@ -1,3 +1,4 @@
+// O(log(n))
 function searchInsert(nums: number[], target: number): number {
   let pos = null
   let indexRef = 0
@@ -20,7 +21,7 @@ function searchInsert(nums: number[], target: number): number {
     }
 
     if (target < nums[halfWay]) {
-      nums.splice(-halfWay, halfWay)
+      nums.splice(halfWay)
     } else {
       nums.splice(0, halfWay)
       indexRef += halfWay
