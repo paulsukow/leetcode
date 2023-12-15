@@ -1,6 +1,6 @@
 function isValid(s: string): boolean {
   if (s.length === 0) {
-    return false
+    return true
   }
 
   if (s.length % 2) {
@@ -43,4 +43,34 @@ function isValid(s: string): boolean {
   }
 
   return !opened.length;
+};
+
+function isValidShorterVersion(s: string): boolean {
+  const pairMap = new Map()
+  pairMap.set('{', '}')
+  pairMap.set('(', ')')
+  pairMap.set('[', ']')
+
+  const chars = s.split('')
+
+  let openedBrackets = []
+
+  for (let i = 0; i < chars.length; i++) {
+    const curr = chars[i]
+    if (pairMap.has(curr)) {
+      openedBrackets.push(curr)
+    } else {
+      if (openedBrackets.length === 0) {
+        return false
+      }
+
+      const openedBracket = openedBrackets.pop()
+      const isWrongClose = pairMap.get(openedBracket) !== curr
+      if (isWrongClose) {
+        return false
+      }
+    }
+  }
+
+  return !openedBrackets.length;
 };
